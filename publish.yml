@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
     inputs:
       semver:
-        description: Semver bump type
         required: true
       preid:
         description: Pre ID
@@ -34,7 +33,6 @@ jobs:
           git_commit_gpgsign: true
 
       - name: Setup Node and pnpm
-        uses: silverhand-io/actions-node-pnpm-run-steps@v1.2.2
 
       - name: Configure Git user
         run: |
@@ -42,7 +40,6 @@ jobs:
           git config --global user.name silverhand-bot
 
       - name: Publish to GitHub
-        # add `no-verify-access` due to https://github.com/lerna/lerna/issues/2788
         run: |
           pnpm lerna publish \
             -m "release: %s" \
